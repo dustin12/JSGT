@@ -9,7 +9,7 @@ process.types = {};
 var functionDepth = 0;
 var ifDepth = 0;
 
-console.log(process.argv);
+//console.log(process.argv);
 
 //var types = [];
 var code = fs.readFileSync(process.argv[2],'utf8');
@@ -21,6 +21,8 @@ var macros2 = fs.readFileSync('./macros2.js','utf8');
 code = sweet.compile(macros2+code, {readableNames:false}).code;
 //console.log(code);
 code = sweet.compile(macros+code,{readableNames:true}).code;
+
+var output = fs.writeFileSync('output'+process.argv[2],code,'utf8');
 
 var tree = esprima.parse(code);
 walkTree(tree);
